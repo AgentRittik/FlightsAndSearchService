@@ -1,6 +1,9 @@
 const express  = require("express");
 const bodyParser = require("body-parser");
 
+//const {City} = require('./models/index');  // this is not the right place to interact with model  --> move to repository
+
+
 const { PORT } = require('./config/serverConfig');
 
 
@@ -15,7 +18,7 @@ const setupAndStartServer = async () => {
 
 
 
-    app.listen(PORT , () => {
+    app.listen(PORT , async() => {
         console.log(`Server is started at ${PORT}`);
     });
 };
