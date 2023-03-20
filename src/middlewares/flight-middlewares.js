@@ -1,3 +1,5 @@
+const { ClientErrorCodes } = require('../uitls/error-codes');
+
 const validateCreateFlight = (req, res, next) => {
     if(
         !req.body.flightNumber ||
@@ -9,7 +11,7 @@ const validateCreateFlight = (req, res, next) => {
         !req.body.price
     ) {
         // if any of the above is not present
-        return res.status(400).json({
+        return res.status(ClientErrorCodes.BAD_REQUEST).json({
             data: {},
             sucess: false,
             message: 'Invalid request body for creating flight',
