@@ -1,6 +1,6 @@
 const { FlightService } = require('../services/index');
 
-const { SucessCodes } = require('../uitls/error-codes');
+const { SucessCodes } = require('../utils/error-codes');
 const flightService = new FlightService();
 
 const create = async(req, res) => {
@@ -55,11 +55,59 @@ const getAll = async(req, res) => {
     }
 }
 
+const get = async(req,res) => {
+    try{
+        const response  = await flightService.getFlight(req.params.id);
+        return res.status(SucessCodes.OK).json({
+            data: response,
+            sucess : true,
+            ree : {},
+            message : 'Sucesfully fetched the city'
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            sucess: false,
+            message: 'not able to FETCH the flights',
+            err: error
+        });
+    }
+    
+}
+
+const update = async(req,res) => {
+    try{
+        console.log("rittik");
+        const response  = await flightService.updateFlight(req.params.id , req.body);
+        return res.status(SucessCodes.OK).json({
+            data: response,
+            sucess : true,
+            ree : {},
+            message : 'Sucesfully UPDATED the city'
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            sucess: false,
+            message: 'not able to UPDATE the flights',
+            err: error
+        });
+    }
+    
+}
+
 
 
 
 
 module.exports = {
     create,
-    getAll
+    getAll,
+    get,
+    update
+
 }
